@@ -118,8 +118,14 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <CartProvider>
+        <WishlistProvider>
+          <RecentlyViewedProvider>
+            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+            <Outlet />
+          </RecentlyViewedProvider>
+        </WishlistProvider>
+      </CartProvider>
     </QueryClientProvider>
   );
 }

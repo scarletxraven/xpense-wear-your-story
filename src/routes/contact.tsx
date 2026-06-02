@@ -15,6 +15,9 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
+const inputCls =
+  "w-full h-12 px-4 border border-border bg-background text-sm focus:outline-none focus:border-primary";
+
 function ContactPage() {
   const [sent, setSent] = useState(false);
   return (
@@ -27,18 +30,17 @@ function ContactPage() {
 
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-14">
           <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              setSent(true);
-            }}
+            onSubmit={(e) => { e.preventDefault(); setSent(true); }}
             className="space-y-5"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <Field label="Name"><input required className="input" /></Field>
-              <Field label="Email"><input type="email" required className="input" /></Field>
+              <Field label="Name"><input required className={inputCls} /></Field>
+              <Field label="Email"><input type="email" required className={inputCls} /></Field>
             </div>
-            <Field label="Subject"><input className="input" /></Field>
-            <Field label="Message"><textarea rows={6} required className="input resize-none" /></Field>
+            <Field label="Subject"><input className={inputCls} /></Field>
+            <Field label="Message">
+              <textarea rows={6} required className={`${inputCls} h-auto py-3 resize-none`} />
+            </Field>
             <button
               type="submit"
               className="h-12 px-8 bg-primary text-primary-foreground text-xs font-semibold uppercase tracking-[0.2em] hover:bg-accent"
@@ -54,8 +56,6 @@ function ContactPage() {
           </aside>
         </div>
       </section>
-
-      <style>{`.input { @apply w-full h-12 px-4 border border-border bg-background text-sm focus:outline-none focus:border-primary; }`}</style>
     </SiteLayout>
   );
 }

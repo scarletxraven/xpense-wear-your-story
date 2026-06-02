@@ -1,18 +1,22 @@
 import { Link } from "@tanstack/react-router";
-import { Search, ShoppingBag, User, Menu, X } from "lucide-react";
+import { Heart, Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 
 const nav = [
-  { label: "Home", href: "/" },
-  { label: "Shop", href: "/" },
-  { label: "Collections", href: "/" },
-  { label: "About", href: "/" },
-  { label: "Contact", href: "/" },
+  { label: "Home", to: "/" as const },
+  { label: "Shop", to: "/shop" as const },
+  { label: "Collections", to: "/collections" as const },
+  { label: "About", to: "/about" as const },
+  { label: "Contact", to: "/contact" as const },
 ];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { count } = useCart();
+  const { ids: wishIds } = useWishlist();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -36,26 +40,42 @@ export function Navbar() {
           </Link>
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium uppercase tracking-[0.14em]">
             {nav.map((n) => (
-              <a key={n.label} href={n.href} className="relative py-2 hover:opacity-60 transition">
+              <Link
+                key={n.label}
+                to={n.to}
+                className="relative py-2 hover:opacity-60 transition"
+                activeProps={{ className: "relative py-2 underline underline-offset-8" }}
+                activeOptions={{ exact: n.to === "/" }}
+              >
                 {n.label}
-              </a>
+              </Link>
             ))}
           </nav>
         </div>
 
         <div className="flex items-center gap-1">
-          <button aria-label="Search" className="p-2.5 hover:bg-secondary transition">
+          <Link to="/shop" aria-label="Search" className="p-2.5 hover:bg-secondary transition">
             <Search className="h-[18px] w-[18px]" />
-          </button>
-          <button aria-label="Account" className="p-2.5 hover:bg-secondary transition">
+          </Link>
+          <Link to="/wishlist" aria-label="Wishlist" className="relative p-2.5 hover:bg-secondary transition">
+            <Heart className="h-[18px] w-[18px]" />
+            {wishIds.length > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center bg-primary text-[10px] font-semibold text-primary-foreground">
+                {wishIds.length}
+              </span>
+            )}
+          </Link>
+          <Link to="/account" aria-label="Account" className="p-2.5 hover:bg-secondary transition">
             <User className="h-[18px] w-[18px]" />
-          </button>
-          <button aria-label="Cart" className="relative p-2.5 hover:bg-secondary transition">
+          </Link>
+          <Link to="/cart" aria-label="Cart" className="relative p-2.5 hover:bg-secondary transition">
             <ShoppingBag className="h-[18px] w-[18px]" />
-            <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center bg-primary text-[10px] font-semibold text-primary-foreground">
-              2
-            </span>
-          </button>
+            {count > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center bg-primary text-[10px] font-semibold text-primary-foreground">
+                {count}
+              </span>
+            )}
+          </Link>
           <button
             aria-label="Menu"
             className="ml-1 p-2.5 md:hidden hover:bg-secondary transition"
@@ -69,9 +89,14 @@ export function Navbar() {
       {open && (
         <nav className="md:hidden border-t border-border bg-background px-5 py-4 flex flex-col gap-1 text-sm uppercase tracking-[0.14em]">
           {nav.map((n) => (
-            <a key={n.label} href={n.href} className="py-3 border-b border-border/60" onClick={() => setOpen(false)}>
+            <Link
+              key={n.label}
+              to={n.to}
+              className="py-3 border-b border-border/60"
+              onClick={() => setOpen(false)}
+            >
               {n.label}
-            </a>
+            </Link>
           ))}
         </nav>
       )}

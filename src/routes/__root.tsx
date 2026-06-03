@@ -14,6 +14,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import { RecentlyViewedProvider } from "@/context/RecentlyViewedContext";
+import { Toaster } from "@/components/ui/sonner";
+
 
 function NotFoundComponent() {
   return (
@@ -126,7 +128,9 @@ function RootComponent() {
           <RecentlyViewedProvider>
             {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
             <Outlet />
+            <Toaster position="bottom-right" />
           </RecentlyViewedProvider>
+
         </WishlistProvider>
       </CartProvider>
     </QueryClientProvider>

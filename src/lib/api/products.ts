@@ -74,6 +74,24 @@ export async function getProductById(id: string): Promise<Product | null> {
   return delay(PRODUCTS.find((p) => p.id === id) ?? null);
 }
 
+export async function getProductBySlug(slug: string): Promise<Product | null> {
+  return delay(PRODUCTS.find((p) => p.slug === slug) ?? null);
+}
+
 export async function getProductsByIds(ids: string[]): Promise<Product[]> {
   return delay(PRODUCTS.filter((p) => ids.includes(p.id)));
 }
+
+export async function getRelatedProducts(
+  product: Product,
+  limit = 8,
+): Promise<Product[]> {
+  const related = PRODUCTS.filter(
+    (p) => p.id !== product.id && p.category === product.category,
+  );
+  const fillers = PRODUCTS.filter(
+    (p) => p.id !== product.id && p.category !== product.category,
+  );
+  return delay([...related, ...fillers].slice(0, limit));
+}
+

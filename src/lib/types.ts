@@ -6,16 +6,21 @@ export interface Product {
   slug: string;
   name: string;
   category: ProductCategory;
+  collection?: string;
+  description?: string;
   price: number;
   image: string;
+  images?: string[];
   badge?: string;
   sizes: ProductSize[];
   colors: { name: string; hex: string }[];
   inStock: boolean;
+  stock?: number;
   createdAt: string; // ISO
   sales: number;
   featured?: boolean;
 }
+
 
 export interface PaginatedResponse<T> {
   data: T[];

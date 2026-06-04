@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import street from "@/assets/cat-streetwear.jpg";
 import anime from "@/assets/cat-anime.jpg";
@@ -5,10 +6,10 @@ import graphic from "@/assets/cat-graphic.jpg";
 import casual from "@/assets/cat-casual.jpg";
 
 const items = [
-  { name: "Streetwear", count: "24 pieces", img: street, span: "md:col-span-2 md:row-span-2 aspect-square md:aspect-auto" },
-  { name: "Anime Inspired", count: "18 pieces", img: anime, span: "aspect-[4/5]" },
-  { name: "Graphic Tees", count: "32 pieces", img: graphic, span: "aspect-[4/5]" },
-  { name: "Casual Essentials", count: "21 pieces", img: casual, span: "md:col-span-2 aspect-[16/9] md:aspect-[2/1]" },
+  { slug: "streetwear", name: "Streetwear", count: "24 pieces", img: street, span: "md:col-span-2 md:row-span-2 aspect-square md:aspect-auto" },
+  { slug: "anime-inspired", name: "Anime Inspired", count: "18 pieces", img: anime, span: "aspect-[4/5]" },
+  { slug: "graphic-tees", name: "Graphic Tees", count: "32 pieces", img: graphic, span: "aspect-[4/5]" },
+  { slug: "casual", name: "Casual Essentials", count: "21 pieces", img: casual, span: "md:col-span-2 aspect-[16/9] md:aspect-[2/1]" },
 ];
 
 export function Collections() {
@@ -24,16 +25,17 @@ export function Collections() {
               Built for the streets.<br />Made for the bold.
             </h2>
           </div>
-          <a href="#" className="hidden md:inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] hover:opacity-60">
+          <Link to="/collections" className="hidden md:inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] hover:opacity-60">
             View all <ArrowUpRight className="h-4 w-4" />
-          </a>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4">
           {items.map((c) => (
-            <a
-              key={c.name}
-              href="#"
+            <Link
+              key={c.slug}
+              to="/collections/$slug"
+              params={{ slug: c.slug }}
               className={`hover-zoom group relative block overflow-hidden bg-secondary ${c.span}`}
             >
               <img
@@ -52,7 +54,7 @@ export function Collections() {
                   <ArrowUpRight className="h-4 w-4" />
                 </span>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

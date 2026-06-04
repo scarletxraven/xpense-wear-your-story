@@ -71,9 +71,12 @@ function CartPage() {
                   <Row label="Total" value={`$${(subtotal + shipping).toFixed(2)}`} bold />
                 </div>
               </dl>
-              <button className="mt-6 w-full h-12 bg-primary text-primary-foreground text-xs font-semibold uppercase tracking-[0.2em] hover:bg-accent">
+              <Link
+                to="/checkout"
+                className="mt-6 w-full h-12 inline-flex items-center justify-center bg-primary text-primary-foreground text-xs font-semibold uppercase tracking-[0.2em] hover:bg-accent"
+              >
                 Checkout
-              </button>
+              </Link>
               <button onClick={clear} className="mt-3 w-full h-10 border border-border text-xs uppercase tracking-[0.2em] hover:bg-secondary">
                 Clear cart
               </button>

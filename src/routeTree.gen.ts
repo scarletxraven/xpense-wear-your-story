@@ -10,11 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WishlistRouteImport } from './routes/wishlist'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CollectionsRouteImport } from './routes/collections'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AccountRouteImport } from './routes/account'
@@ -22,6 +25,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AccountIndexRouteImport } from './routes/account.index'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
 import { Route as AdminProductsRouteImport } from './routes/admin.products'
@@ -29,10 +33,19 @@ import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
 import { Route as AdminCustomersRouteImport } from './routes/admin.customers'
 import { Route as AdminCollectionsRouteImport } from './routes/admin.collections'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
+import { Route as AccountSettingsRouteImport } from './routes/account.settings'
+import { Route as AccountSavedRouteImport } from './routes/account.saved'
+import { Route as AccountProfileRouteImport } from './routes/account.profile'
+import { Route as AccountOrdersRouteImport } from './routes/account.orders'
 
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
   path: '/wishlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopRoute = ShopRouteImport.update({
@@ -50,6 +63,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -58,6 +76,11 @@ const ContactRoute = ContactRouteImport.update({
 const CollectionsRoute = CollectionsRouteImport.update({
   id: '/collections',
   path: '/collections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -95,6 +118,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AccountIndexRoute = AccountIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AccountRoute,
+} as any)
 const ProductsSlugRoute = ProductsSlugRouteImport.update({
   id: '/products/$slug',
   path: '/products/$slug',
@@ -130,19 +158,46 @@ const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => AdminRoute,
 } as any)
+const AccountSettingsRoute = AccountSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountSavedRoute = AccountSavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountProfileRoute = AccountProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AccountRoute,
+} as any)
+const AccountOrdersRoute = AccountOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AccountRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/account': typeof AccountRoute
+  '/account': typeof AccountRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/collections': typeof CollectionsRouteWithChildren
   '/contact': typeof ContactRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/shop': typeof ShopRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wishlist': typeof WishlistRoute
+  '/account/orders': typeof AccountOrdersRoute
+  '/account/profile': typeof AccountProfileRoute
+  '/account/saved': typeof AccountSavedRoute
+  '/account/settings': typeof AccountSettingsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/collections': typeof AdminCollectionsRoute
   '/admin/customers': typeof AdminCustomersRoute
@@ -150,19 +205,26 @@ export interface FileRoutesByFullPath {
   '/admin/products': typeof AdminProductsRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/account/': typeof AccountIndexRoute
   '/admin/': typeof AdminIndexRoute
   '/collections/': typeof CollectionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/shop': typeof ShopRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wishlist': typeof WishlistRoute
+  '/account/orders': typeof AccountOrdersRoute
+  '/account/profile': typeof AccountProfileRoute
+  '/account/saved': typeof AccountSavedRoute
+  '/account/settings': typeof AccountSettingsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/collections': typeof AdminCollectionsRoute
   '/admin/customers': typeof AdminCustomersRoute
@@ -170,6 +232,7 @@ export interface FileRoutesByTo {
   '/admin/products': typeof AdminProductsRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/account': typeof AccountIndexRoute
   '/admin': typeof AdminIndexRoute
   '/collections': typeof CollectionsIndexRoute
 }
@@ -177,15 +240,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/account': typeof AccountRoute
+  '/account': typeof AccountRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/collections': typeof CollectionsRouteWithChildren
   '/contact': typeof ContactRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/shop': typeof ShopRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wishlist': typeof WishlistRoute
+  '/account/orders': typeof AccountOrdersRoute
+  '/account/profile': typeof AccountProfileRoute
+  '/account/saved': typeof AccountSavedRoute
+  '/account/settings': typeof AccountSettingsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/collections': typeof AdminCollectionsRoute
   '/admin/customers': typeof AdminCustomersRoute
@@ -193,6 +263,7 @@ export interface FileRoutesById {
   '/admin/products': typeof AdminProductsRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/account/': typeof AccountIndexRoute
   '/admin/': typeof AdminIndexRoute
   '/collections/': typeof CollectionsIndexRoute
 }
@@ -204,12 +275,19 @@ export interface FileRouteTypes {
     | '/account'
     | '/admin'
     | '/cart'
+    | '/checkout'
     | '/collections'
     | '/contact'
+    | '/forgot-password'
     | '/login'
     | '/register'
     | '/shop'
+    | '/sitemap.xml'
     | '/wishlist'
+    | '/account/orders'
+    | '/account/profile'
+    | '/account/saved'
+    | '/account/settings'
     | '/admin/analytics'
     | '/admin/collections'
     | '/admin/customers'
@@ -217,19 +295,26 @@ export interface FileRouteTypes {
     | '/admin/products'
     | '/collections/$slug'
     | '/products/$slug'
+    | '/account/'
     | '/admin/'
     | '/collections/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/account'
     | '/cart'
+    | '/checkout'
     | '/contact'
+    | '/forgot-password'
     | '/login'
     | '/register'
     | '/shop'
+    | '/sitemap.xml'
     | '/wishlist'
+    | '/account/orders'
+    | '/account/profile'
+    | '/account/saved'
+    | '/account/settings'
     | '/admin/analytics'
     | '/admin/collections'
     | '/admin/customers'
@@ -237,6 +322,7 @@ export interface FileRouteTypes {
     | '/admin/products'
     | '/collections/$slug'
     | '/products/$slug'
+    | '/account'
     | '/admin'
     | '/collections'
   id:
@@ -246,12 +332,19 @@ export interface FileRouteTypes {
     | '/account'
     | '/admin'
     | '/cart'
+    | '/checkout'
     | '/collections'
     | '/contact'
+    | '/forgot-password'
     | '/login'
     | '/register'
     | '/shop'
+    | '/sitemap.xml'
     | '/wishlist'
+    | '/account/orders'
+    | '/account/profile'
+    | '/account/saved'
+    | '/account/settings'
     | '/admin/analytics'
     | '/admin/collections'
     | '/admin/customers'
@@ -259,6 +352,7 @@ export interface FileRouteTypes {
     | '/admin/products'
     | '/collections/$slug'
     | '/products/$slug'
+    | '/account/'
     | '/admin/'
     | '/collections/'
   fileRoutesById: FileRoutesById
@@ -266,14 +360,17 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  AccountRoute: typeof AccountRoute
+  AccountRoute: typeof AccountRouteWithChildren
   AdminRoute: typeof AdminRouteWithChildren
   CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRoute
   CollectionsRoute: typeof CollectionsRouteWithChildren
   ContactRoute: typeof ContactRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
   ShopRoute: typeof ShopRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WishlistRoute: typeof WishlistRoute
   ProductsSlugRoute: typeof ProductsSlugRoute
 }
@@ -285,6 +382,13 @@ declare module '@tanstack/react-router' {
       path: '/wishlist'
       fullPath: '/wishlist'
       preLoaderRoute: typeof WishlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop': {
@@ -308,6 +412,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -320,6 +431,13 @@ declare module '@tanstack/react-router' {
       path: '/collections'
       fullPath: '/collections'
       preLoaderRoute: typeof CollectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -371,6 +489,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/account/': {
+      id: '/account/'
+      path: '/'
+      fullPath: '/account/'
+      preLoaderRoute: typeof AccountIndexRouteImport
+      parentRoute: typeof AccountRoute
+    }
     '/products/$slug': {
       id: '/products/$slug'
       path: '/products/$slug'
@@ -420,8 +545,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAnalyticsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/account/settings': {
+      id: '/account/settings'
+      path: '/settings'
+      fullPath: '/account/settings'
+      preLoaderRoute: typeof AccountSettingsRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/saved': {
+      id: '/account/saved'
+      path: '/saved'
+      fullPath: '/account/saved'
+      preLoaderRoute: typeof AccountSavedRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/profile': {
+      id: '/account/profile'
+      path: '/profile'
+      fullPath: '/account/profile'
+      preLoaderRoute: typeof AccountProfileRouteImport
+      parentRoute: typeof AccountRoute
+    }
+    '/account/orders': {
+      id: '/account/orders'
+      path: '/orders'
+      fullPath: '/account/orders'
+      preLoaderRoute: typeof AccountOrdersRouteImport
+      parentRoute: typeof AccountRoute
+    }
   }
 }
+
+interface AccountRouteChildren {
+  AccountOrdersRoute: typeof AccountOrdersRoute
+  AccountProfileRoute: typeof AccountProfileRoute
+  AccountSavedRoute: typeof AccountSavedRoute
+  AccountSettingsRoute: typeof AccountSettingsRoute
+  AccountIndexRoute: typeof AccountIndexRoute
+}
+
+const AccountRouteChildren: AccountRouteChildren = {
+  AccountOrdersRoute: AccountOrdersRoute,
+  AccountProfileRoute: AccountProfileRoute,
+  AccountSavedRoute: AccountSavedRoute,
+  AccountSettingsRoute: AccountSettingsRoute,
+  AccountIndexRoute: AccountIndexRoute,
+}
+
+const AccountRouteWithChildren =
+  AccountRoute._addFileChildren(AccountRouteChildren)
 
 interface AdminRouteChildren {
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
@@ -460,14 +632,17 @@ const CollectionsRouteWithChildren = CollectionsRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  AccountRoute: AccountRoute,
+  AccountRoute: AccountRouteWithChildren,
   AdminRoute: AdminRouteWithChildren,
   CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRoute,
   CollectionsRoute: CollectionsRouteWithChildren,
   ContactRoute: ContactRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
   ShopRoute: ShopRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   WishlistRoute: WishlistRoute,
   ProductsSlugRoute: ProductsSlugRoute,
 }

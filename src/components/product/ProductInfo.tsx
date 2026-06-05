@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { Heart, Minus, Plus, ShoppingBag } from "lucide-react";
+import { ProductHeader } from "./ProductHeader";
+import { ProductMeta } from "./ProductMeta";
+import { ProductDescription } from "./ProductDescription";
+import { ProductFeatures } from "./ProductFeatures";
 import { SizeSelector } from "./SizeSelector";
 import { ColorSelector } from "./ColorSelector";
 import { useCart } from "@/context/CartContext";
@@ -36,36 +40,12 @@ export function ProductInfo({ product }: { product: Product }) {
 
   return (
     <div className="flex flex-col gap-8">
-      <div>
-        <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-          {product.collection ?? product.category}
-        </p>
-        <h1 className="mt-3 font-display text-3xl md:text-5xl font-bold leading-[1.05] text-balance">
-          {product.name}
-        </h1>
-        <div className="mt-4 flex items-center gap-4">
-          <p className="font-display text-2xl font-semibold tabular-nums">
-            ${product.price}
-          </p>
-          <span
-            className={`inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] ${
-              product.inStock ? "text-foreground" : "text-muted-foreground"
-            }`}
-          >
-            <span
-              className={`h-1.5 w-1.5 rounded-full ${
-                product.inStock ? "bg-foreground" : "bg-muted-foreground"
-              }`}
-            />
-            {product.inStock ? "In Stock" : "Sold Out"}
-          </span>
-        </div>
+      <div className="flex flex-col gap-4">
+        <ProductHeader product={product} />
+        <ProductMeta product={product} />
       </div>
 
-      <p className="text-sm leading-relaxed text-muted-foreground max-w-prose">
-        {product.description ??
-          "A staple drop built around quiet confidence. Heavyweight cotton, boxy silhouette, and clean lines made for everyday wear — from the studio to the street."}
-      </p>
+      <ProductDescription product={product} />
 
       <ColorSelector colors={product.colors} value={color} onChange={setColor} />
       <SizeSelector sizes={product.sizes} value={size} onChange={setSize} />
@@ -122,11 +102,7 @@ export function ProductInfo({ product }: { product: Product }) {
         </button>
       </div>
 
-      <ul className="text-xs uppercase tracking-[0.18em] text-muted-foreground space-y-2 border-t border-border pt-6">
-        <li>— Free shipping over $100</li>
-        <li>— 30-day easy returns</li>
-        <li>— Designed in-house · Made in limited runs</li>
-      </ul>
+      <ProductFeatures product={product} />
     </div>
   );
 }

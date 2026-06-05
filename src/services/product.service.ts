@@ -12,6 +12,11 @@ import {
   getProductsByIds as _getByIds,
   getRelatedProducts as _getRelated,
 } from "@/lib/api/products";
+import {
+  createProduct as _create,
+  updateProduct as _update,
+  deleteProduct as _delete,
+} from "@/content/products";
 import type { PaginatedResponse, Product, ProductQuery } from "@/types";
 
 export const productService = {
@@ -21,6 +26,10 @@ export const productService = {
   getByIds: (ids: string[]): Promise<Product[]> => _getByIds(ids),
   getRelated: (product: Product, limit?: number): Promise<Product[]> =>
     _getRelated(product, limit),
+  // Mock admin actions — replace with API later.
+  create: _create,
+  update: _update,
+  remove: _delete,
 };
 
 export type ProductService = typeof productService;

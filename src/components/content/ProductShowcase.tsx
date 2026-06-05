@@ -33,7 +33,8 @@ export function ProductShowcase({
             )}
           </div>
           <Link
-            to={block.buttonHref}
+            to={block.buttonTo}
+            search={block.buttonSearch as never}
             className="inline-flex items-center gap-2 self-start md:self-end text-sm uppercase tracking-[0.22em] underline-offset-8 hover:underline"
           >
             {block.buttonText} <ArrowUpRight className="h-4 w-4" />

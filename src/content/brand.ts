@@ -25,7 +25,10 @@ export interface SectionBlock {
   title: string;
   subtitle: string;
   buttonText: string;
-  buttonHref: string;
+  /** Path passed to TanStack Router `<Link to>`. */
+  buttonTo: string;
+  /** Optional query object passed to `<Link search>`. */
+  buttonSearch?: Record<string, string>;
 }
 
 export const brandStory: BrandStoryBlock = {
@@ -51,7 +54,8 @@ export const newArrivalsBlock: SectionBlock = {
   subtitle:
     "Fresh from the studio. Limited quantities — once they're gone, they're gone.",
   buttonText: "Shop All",
-  buttonHref: "/shop?sort=new",
+  buttonTo: "/shop",
+  buttonSearch: { sort: "new" },
 };
 
 export const bestSellersBlock: SectionBlock = {
@@ -60,5 +64,6 @@ export const bestSellersBlock: SectionBlock = {
   subtitle:
     "The pieces that keep selling out. Restocked in limited runs only.",
   buttonText: "Shop All",
-  buttonHref: "/shop?sort=bestseller",
+  buttonTo: "/shop",
+  buttonSearch: { sort: "bestseller" },
 };

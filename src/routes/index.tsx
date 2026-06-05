@@ -3,12 +3,17 @@ import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
 import { Marquee } from "@/components/site/Marquee";
 import { Collections } from "@/components/site/Collections";
-import { ProductGrid } from "@/components/site/ProductGrid";
-import { Story } from "@/components/site/Story";
+import { ProductShowcase } from "@/components/content/ProductShowcase";
+import { EditableHero } from "@/components/content/EditableHero";
 import { Reviews } from "@/components/site/Reviews";
 import { Newsletter } from "@/components/site/Newsletter";
 import { Footer } from "@/components/site/Footer";
 import { bestSellers, newArrivals } from "@/lib/products";
+import {
+  brandStory,
+  newArrivalsBlock,
+  bestSellersBlock,
+} from "@/content/brand";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,21 +50,9 @@ function Home() {
         <Hero />
         <Marquee />
         <Collections />
-        <ProductGrid
-          id="new"
-          label="· 02 — New Arrivals"
-          title="Just dropped."
-          description="Fresh from the studio. Limited quantities — once they're gone, they're gone."
-          products={newArrivals}
-        />
-        <Story />
-        <ProductGrid
-          id="best"
-          label="· 03 — Best Sellers"
-          title="The crowd favorites."
-          description="The pieces that keep selling out. Restocked in limited runs only."
-          products={bestSellers}
-        />
+        <ProductShowcase id="new" block={newArrivalsBlock} products={newArrivals} />
+        <EditableHero block={brandStory} />
+        <ProductShowcase id="best" block={bestSellersBlock} products={bestSellers} />
         <Reviews />
         <Newsletter />
         <Footer />

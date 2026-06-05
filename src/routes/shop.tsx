@@ -11,7 +11,22 @@ import { Newsletter } from "@/components/site/Newsletter";
 import { listProducts } from "@/lib/api/products";
 import type { PaginatedResponse, Product, ProductQuery } from "@/lib/types";
 
+type ShopSearch = { sort?: string };
+
+const SORT_ALIAS: Record<string, ProductQuery["sort"]> = {
+  new: "newest",
+  newest: "newest",
+  bestseller: "best-selling",
+  "best-selling": "best-selling",
+  featured: "featured",
+  "price-asc": "price-asc",
+  "price-desc": "price-desc",
+};
+
 export const Route = createFileRoute("/shop")({
+  validateSearch: (s: Record<string, unknown>): ShopSearch => ({
+    sort: typeof s.sort === "string" ? s.sort : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Shop — XPENSE | Streetwear, Graphic Tees & Anime Apparel" },
@@ -26,7 +41,9 @@ export const Route = createFileRoute("/shop")({
 const PAGE_SIZE = 8;
 
 function ShopPage() {
-  const [query, setQuery] = useState<ProductQuery>({ sort: "newest", page: 1, pageSize: PAGE_SIZE });
+  const search = Route.useSearch();
+  const initialSort = (search.sort && SORT_ALIAS[search.sort]) || "newest";
+  const [query, setQuery] = useState<ProductQuery>({ sort: initialSort, page: 1, pageSize: PAGE_SIZE });
   const [result, setResult] = useState<PaginatedResponse<Product> | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);

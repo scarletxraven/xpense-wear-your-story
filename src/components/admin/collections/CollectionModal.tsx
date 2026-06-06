@@ -215,6 +215,9 @@ export function CollectionModal({
   );
 }
 
+const inputCls =
+  "w-full h-10 border border-border bg-background px-3 text-sm focus:outline-none focus:border-foreground";
+
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
@@ -222,7 +225,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
         {label}
       </span>
       <div className="mt-1.5">{children}</div>
-      <style>{`.input{width:100%;height:40px;border:1px solid hsl(var(--border));background:hsl(var(--background));padding:0 12px;font-size:14px}textarea.input{height:auto;padding:10px 12px}`}</style>
     </label>
   );
 }
+

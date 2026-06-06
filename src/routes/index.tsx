@@ -53,7 +53,9 @@ function Home() {
         <Collections />
         <ProductShowcase id="new" block={newArrivalsBlock} products={newArrivals} />
         <EditableHero block={brandStory} />
+        <BrandMetrics />
         <ProductShowcase id="best" block={bestSellersBlock} products={bestSellers} />
+
         <Reviews />
         <Newsletter />
         <Footer />

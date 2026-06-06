@@ -41,9 +41,7 @@ export function CollectionModal({
   );
   const [saving, setSaving] = useState(false);
 
-  // Reset when modal toggles
-  const key = `${open}-${initial?.id ?? "new"}`;
-  useState(() => key); // ensure reset triggers
+
 
   const set = <K extends keyof CollectionFormValues>(k: K, v: CollectionFormValues[K]) =>
     setValues((p) => ({ ...p, [k]: v }));

@@ -29,13 +29,14 @@ export function CollectionGrid({ products, status, onRetry }: Props) {
   if (products.length === 0) {
     return (
       <div className="border border-dashed border-border py-24 text-center">
-        <p className="font-display text-2xl font-semibold">No products found.</p>
+        <p className="font-display text-2xl font-semibold">This rack is still waiting.</p>
         <p className="mt-2 text-sm text-muted-foreground">
-          Try adjusting your filters or check back soon for new drops.
+          No pieces match these filters yet — try widening the search.
         </p>
       </div>
     );
   }
+
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 gap-y-10 md:gap-x-6">

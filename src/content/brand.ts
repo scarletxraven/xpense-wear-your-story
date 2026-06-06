@@ -1,8 +1,9 @@
 import story from "@/assets/story.jpg";
+import { homeCopy } from "@/content/site";
 
 /**
- * Frontend-only editable marketing copy.
- * Future: replace with CMS-fetched content; consumers already read from here.
+ * Marketing blocks. Section copy proxies through `src/content/site.ts`
+ * so all editable strings live in a single source of truth.
  */
 
 export interface BrandStat {
@@ -32,38 +33,29 @@ export interface SectionBlock {
 }
 
 export const brandStory: BrandStoryBlock = {
-  eyebrow: "· The Story",
-  title: "Clothing is the loudest way to stay silent.",
-  body: [
-    "XPENSE started in a back-alley print studio with one rule — every piece must say something. We design for the kids who quote anime in group chats, the artists painting on cheap canvases, the dreamers who can't afford to be quiet.",
-    "Minimal where it matters. Bold where it counts. Made in limited runs so you'll never see your fit twice on the same block.",
-  ],
+  eyebrow: homeCopy.story.eyebrow,
+  title: homeCopy.story.title,
+  body: homeCopy.story.body,
   image: story,
   imageAlt: "XPENSE brand story",
   imagePosition: "left",
-  stats: [
-    { k: "180k+", v: "Community" },
-    { k: "12", v: "Drops / year" },
-    { k: "98%", v: "Satisfaction" },
-  ],
+  stats: [],
 };
 
 export const newArrivalsBlock: SectionBlock = {
-  eyebrow: "· 02 — New Arrivals",
-  title: "Just dropped.",
-  subtitle:
-    "Fresh from the studio. Limited quantities — once they're gone, they're gone.",
-  buttonText: "Shop All",
+  eyebrow: homeCopy.newArrivals.eyebrow,
+  title: homeCopy.newArrivals.title,
+  subtitle: homeCopy.newArrivals.subtitle,
+  buttonText: homeCopy.newArrivals.buttonText,
   buttonTo: "/shop",
   buttonSearch: { sort: "new" },
 };
 
 export const bestSellersBlock: SectionBlock = {
-  eyebrow: "· 03 — Best Sellers",
-  title: "The crowd favorites.",
-  subtitle:
-    "The pieces that keep selling out. Restocked in limited runs only.",
-  buttonText: "Shop All",
+  eyebrow: homeCopy.bestSellers.eyebrow,
+  title: homeCopy.bestSellers.title,
+  subtitle: homeCopy.bestSellers.subtitle,
+  buttonText: homeCopy.bestSellers.buttonText,
   buttonTo: "/shop",
   buttonSearch: { sort: "bestseller" },
 };

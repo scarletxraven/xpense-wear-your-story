@@ -21,12 +21,13 @@ function CartPage() {
 
         {items.length === 0 ? (
           <div className="mt-16 border border-dashed border-border py-24 text-center">
-            <p className="font-display text-2xl font-semibold">Your bag is empty.</p>
-            <p className="mt-2 text-sm text-muted-foreground">Add something you love to get started.</p>
+            <p className="font-display text-2xl font-semibold">Your rotation starts here.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Nothing in the bag yet — pick something worth wearing.</p>
             <Link to="/shop" className="mt-6 inline-flex h-11 items-center px-6 bg-primary text-primary-foreground text-xs uppercase tracking-[0.2em] hover:bg-accent">
-              Shop now
+              Start shopping
             </Link>
           </div>
+
         ) : (
           <div className="mt-12 grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12">
             <ul className="divide-y divide-border border-y border-border">

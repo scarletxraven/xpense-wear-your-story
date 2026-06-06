@@ -3,6 +3,7 @@ import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
 import { Marquee } from "@/components/site/Marquee";
 import { Collections } from "@/components/site/Collections";
+import { BrandMetrics } from "@/components/site/BrandMetrics";
 import { ProductShowcase } from "@/components/content/ProductShowcase";
 import { EditableHero } from "@/components/content/EditableHero";
 import { Reviews } from "@/components/site/Reviews";
@@ -52,7 +53,9 @@ function Home() {
         <Collections />
         <ProductShowcase id="new" block={newArrivalsBlock} products={newArrivals} />
         <EditableHero block={brandStory} />
+        <BrandMetrics />
         <ProductShowcase id="best" block={bestSellersBlock} products={bestSellers} />
+
         <Reviews />
         <Newsletter />
         <Footer />

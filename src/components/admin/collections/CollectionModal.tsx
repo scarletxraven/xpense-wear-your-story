@@ -92,14 +92,14 @@ export function CollectionModal({
                     slug: p.slug || slugify(name),
                   }));
                 }}
-                className="input"
+                className={inputCls}
               />
             </Field>
             <Field label="Slug">
               <input
                 value={values.slug}
                 onChange={(e) => set("slug", slugify(e.target.value))}
-                className="input font-mono text-xs"
+                className={`${inputCls} font-mono text-xs`}
                 placeholder="auto-from-name"
               />
             </Field>
@@ -107,7 +107,7 @@ export function CollectionModal({
               <input
                 value={values.tagline}
                 onChange={(e) => set("tagline", e.target.value)}
-                className="input"
+                className={inputCls}
               />
             </Field>
             <Field label="Description">
@@ -115,17 +115,18 @@ export function CollectionModal({
                 rows={4}
                 value={values.description ?? ""}
                 onChange={(e) => set("description", e.target.value)}
-                className="input resize-none"
+                className={`${inputCls} h-auto py-2.5 resize-none`}
               />
             </Field>
             <Field label="Cover image URL">
               <input
                 value={values.image}
                 onChange={(e) => set("image", e.target.value)}
-                className="input"
+                className={inputCls}
                 placeholder="https://…"
               />
             </Field>
+
 
             <div className="flex items-center gap-6 pt-2">
               <label className="flex items-center gap-2 text-sm">
